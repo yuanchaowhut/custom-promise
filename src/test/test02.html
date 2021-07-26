@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="../lib/promise.js"></script>
+<script>
+    new Promise((resolve, reject) => {
+        // resolve(1);
+        reject(2);
+    }).then((value) => {
+        console.log('onResolved()', value);
+    }, (reason) => {
+        console.log('onRejected()', reason);
+        // return 3;
+        // throw 4;
+        return new Promise((resolve, reject) => {
+            // resolve(5);
+            // reject(6);
+            throw 7;
+        });
+    }).then((value) => {
+        console.log('onResolved2()', value);
+    }, (reason) => {
+        console.log('onRejected2()', reason);
+    });
+</script>
+</body>
+</html>

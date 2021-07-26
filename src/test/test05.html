@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="../lib/promise.js"></script>
+<script>
+    // const p0 = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve(2);
+    //     }, 500);
+    // });
+    const p0 = Promise.resolveDelay(2, 500);
+    const p1 = Promise.resolve(3);
+    const p2 = Promise.resolve(Promise.resolve(4));
+    const p3 = Promise.resolve(Promise.reject(5));
+    const p4 = Promise.reject(6);
+    const p5 = Promise.rejectDelay(7, 3000);
+
+    Promise.race([p0, p1, p2, p3, p4]).then((values) => {
+        console.log(values);
+    }).catch((reason) => {
+        console.log(reason);
+    });
+
+    Promise.all([p0, p1/*, p2*//*, p3*//*, p4*/]).then((values) => {
+        console.log(values);
+    }).catch((reason) => {
+        console.log(reason);
+    });
+
+    Promise.all([p0, p5]).then((values) => {
+        console.log(values);
+    }).catch((reason) => {
+        console.log(reason);
+    });
+</script>
+</body>
+</html>
